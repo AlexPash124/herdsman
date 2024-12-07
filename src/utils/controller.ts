@@ -23,7 +23,7 @@ export class Controller implements IController {
         //this.proxy = Proxy.getInstance();
     }
 
-    sendNotification<T>(notification: string, data: T) {
+    sendNotification<T>(notification: string, data?: T) {
         this._emitter?.emit(notification, {data});
     }
 
