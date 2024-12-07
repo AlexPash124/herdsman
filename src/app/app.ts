@@ -1,23 +1,26 @@
 import * as PIXI from "pixi.js";
 import {BgController} from "../modules/bg/controller";
-import {ViewBG} from "../modules/bg/view";
 import {Assets} from "pixi.js";
 import {manifest} from "../manifest";
-import {PreloaderView} from "../modules/preloader/view";
-import {GamePreloaderController} from "../modules/preloader/mediator";
+import {GamePreloaderController} from "../modules/preloader/controller";
 import {setAnimationTimeoutSync} from "../utils/helperFunctions";
 import {GameController} from "./controller";
+import {HerdsmanController} from "../modules/herdsmanCircle/controller";
+import {FlowGame} from "../modules/flow/flowGame";
 
 export class App extends PIXI.Application {
     protected _gameController?: GameController;
 
     async startGame() {
         this._gameController = new GameController();
+        new FlowGame();
         this.createPreloader();
+
         await this.loadResources()
-        this._gameController.resourcesLoaded();
         await setAnimationTimeoutSync(1);
+        this._gameController.resourcesLoaded();
         this.createBg();
+        this.createHerdsman();
     }
 
     async loadResources() {
@@ -30,18 +33,21 @@ export class App extends PIXI.Application {
     createPreloader() {
         const preloaderContainer = new PIXI.Container();
         this.stage.addChild(preloaderContainer);
-        const view: PreloaderView = new PreloaderView();
-        const instanceMediator: GamePreloaderController = new GamePreloaderController();
-        instanceMediator.initView(view);
-        preloaderContainer.addChild(view);
+        const preloaderController: GamePreloaderController = new GamePreloaderController();
+        preloaderController.initView(preloaderContainer);
     }
 
     createBg() {
         const bgContainer = new PIXI.Container();
         this.stage.addChild(bgContainer);
-        const view = new ViewBG();
-        const instanceMediator: BgController = new BgController();
-        instanceMediator.initView(view);
-        bgContainer.addChild(view);
+        const bgController: BgController = new BgController();
+        bgController.initView(bgContainer);
+    }
+
+    createHerdsman() {
+        const herdsmanContainer = new PIXI.Container();
+        this.stage.addChild(herdsmanContainer);
+        const herdsmanController: HerdsmanController = new HerdsmanController();
+        herdsmanController.initView(herdsmanContainer);
     }
 }

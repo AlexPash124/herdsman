@@ -1,5 +1,6 @@
 import {App} from "./app/app";
 import * as PIXI from "pixi.js";
+import EventEmitter from "eventemitter3";
 declare global {
     // Додаємо нову властивість до globalThis
     var __PIXI_APP__: PIXI.Application;

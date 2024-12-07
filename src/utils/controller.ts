@@ -1,30 +1,26 @@
 import {IController} from "./intefrase/controller";
 import {GLOBAL_EMITTER} from "./eventEmitter";
-import {View} from "./view";
 import EventEmitter from "eventemitter3";
+import {Proxy} from "./proxy";
+import * as PIXI from "pixi.js";
+
 
 export class Controller implements IController {
-    protected _view?: View;
-    protected _emitter?: EventEmitter;
+    protected _emitter?: EventEmitter = GLOBAL_EMITTER;
+    protected _proxy?: Proxy = Proxy.getInstance();
     constructor() {
         this.initEmitter();
-        this.initProxy();
     }
 
-    initView(referenceConstructorUI: View) {
-        this._view = referenceConstructorUI
+    initView(parent: PIXI.Container) {
     }
 
     initEmitter() {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    initProxy() {
-        //this.proxy = Proxy.getInstance();
-    }
-
     sendNotification<T>(notification: string, data?: T) {
-        this._emitter?.emit(notification, {data});
+        this._emitter?.emit(notification, data);
     }
 
     mapNotification<T>(notification: string, callback: (data: T) => void) {
