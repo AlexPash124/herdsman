@@ -10,6 +10,7 @@ import {GameController} from "./controller";
 
 export class App extends PIXI.Application {
     protected _gameController?: GameController;
+
     async startGame() {
         this._gameController = new GameController();
         this.createPreloader();
