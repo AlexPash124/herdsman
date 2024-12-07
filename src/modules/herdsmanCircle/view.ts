@@ -1,9 +1,12 @@
 import {View} from "../../utils/view";
 import * as PIXI from "pixi.js";
 import {Assets, Sprite} from "pixi.js";
+import gsap from "gsap";
 
 export class HerdsmanView extends View {
-    protected _herdsman?: PIXI.Sprite
+    protected _herdsman?: PIXI.Sprite;
+    protected _gsapChangedPosition: unknown;
+
     constructor() {
         super();
 
@@ -20,7 +23,18 @@ export class HerdsmanView extends View {
         this.addChild(this._herdsman)
     }
 
-    setPositionHerdsman(position: PIXI.Point){
+    setPositionHerdsman(position: PIXI.Point) {
         this._herdsman?.position.set(position.x, position.y)
+    }
+
+    changeAnimationPositionHerdsman(position: PIXI.Point) {
+        if (!this._herdsman) return
+
+        this._gsapChangedPosition = gsap.to(this._herdsman, {
+            duration: 1,
+            x: position.x,
+            y: position.y,
+
+        })
     }
 }

@@ -8,12 +8,13 @@ import {GameController} from "./controller";
 import {HerdsmanController} from "../modules/herdsmanCircle/controller";
 import {FlowGame} from "../modules/flow/flowGame";
 
+export let GLOBAL_CLICK_ARE: PIXI.Container;
+
 export class App extends PIXI.Application {
     protected _gameController?: GameController;
 
     async startGame() {
         this._gameController = new GameController();
-        new FlowGame();
         this.createPreloader();
 
         await this.loadResources()
@@ -21,6 +22,8 @@ export class App extends PIXI.Application {
         this._gameController.resourcesLoaded();
         this.createBg();
         this.createHerdsman();
+
+        new FlowGame();
     }
 
     async loadResources() {
@@ -39,6 +42,8 @@ export class App extends PIXI.Application {
 
     createBg() {
         const bgContainer = new PIXI.Container();
+        bgContainer.interactive = true;
+        GLOBAL_CLICK_ARE = bgContainer;
         this.stage.addChild(bgContainer);
         const bgController: BgController = new BgController();
         bgController.initView(bgContainer);
