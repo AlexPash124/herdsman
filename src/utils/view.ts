@@ -17,7 +17,7 @@ export class View extends Container implements IView {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    notifyToMediator(notification: string, data: unknown) {
+    notifyToMediator<T>(notification: string, data: T) {
         this._emitter?.emit(notification, {data});
     }
 

@@ -5,6 +5,6 @@ export interface IController {
     initView(referenceConstructorUI: View): void
     initEmitter(): void
     initProxy(): void
-    sendNotification(notification: string, data: unknown): void
+    sendNotification<T>(notification: string, data: T): void
     mapNotification(notification: string, callback: object): void
 }

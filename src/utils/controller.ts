@@ -23,12 +23,12 @@ export class Controller implements IController {
         //this.proxy = Proxy.getInstance();
     }
 
-    sendNotification(notification: string, data: unknown) {
+    sendNotification<T>(notification: string, data: T) {
         this._emitter?.emit(notification, {data});
     }
 
-    mapNotification(notification: string, callback: (data: unknown) => void) {
-        this._emitter?.on(notification, (data: unknown) => {
+    mapNotification<T>(notification: string, callback: (data: T) => void) {
+        this._emitter?.on(notification, (data: T) => {
             callback(data);
         });
     }
