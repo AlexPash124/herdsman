@@ -20,21 +20,21 @@ export class HerdsmanView extends View {
             x: 100,
             y: 100,
         });
-        this.addChild(this._herdsman)
+        this.addChild(this._herdsman);
     }
 
     setPositionHerdsman(position: PIXI.Point) {
-        this._herdsman?.position.set(position.x, position.y)
+        this._herdsman?.position.set(position.x, position.y);
     }
 
     changeAnimationPositionHerdsman(position: PIXI.Point) {
-        if (!this._herdsman) return
+        if (!this._herdsman) return;
 
         this._gsapChangedPosition = gsap.to(this._herdsman, {
             duration: 1,
             x: position.x,
             y: position.y,
 
-        })
+        });
     }
 }
