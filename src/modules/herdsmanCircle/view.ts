@@ -4,12 +4,13 @@ import {Assets, Sprite} from "pixi.js";
 import gsap from "gsap";
 
 export class HerdsmanView extends View {
+    static HERDSMAN_CHANGED_POSITION = "HerdsmanView.HERDSMAN_CHANGED_POSITION";
     protected _herdsman?: PIXI.Sprite;
-    protected _gsapChangedPosition: unknown;
+    protected _gsapChangedPosition: GSAPTween;
 
     constructor() {
         super();
-
+        this._gsapChangedPosition = gsap.to({},{});
         this.createHerdsman();
     }
 
@@ -29,12 +30,16 @@ export class HerdsmanView extends View {
 
     changeAnimationPositionHerdsman(position: PIXI.Point) {
         if (!this._herdsman) return;
+        if (this._gsapChangedPosition.isActive()) return;
 
         this._gsapChangedPosition = gsap.to(this._herdsman, {
             duration: 1,
             x: position.x,
             y: position.y,
 
+            onUpdate: ()=> {
+                this.notifyToMediator(HerdsmanView.HERDSMAN_CHANGED_POSITION, new PIXI.Point(position.x, position.y));
+            }
         });
     }
 }

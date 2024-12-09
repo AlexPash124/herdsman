@@ -7,6 +7,7 @@ import {setAnimationTimeoutSync} from "../utils/helperFunctions";
 import {GameController} from "./controller";
 import {HerdsmanController} from "../modules/herdsmanCircle/controller";
 import {FlowGame} from "../modules/flow/flowGame";
+import {SheepController} from "../modules/sheep/controller";
 
 export let GLOBAL_CLICK_ARE: PIXI.Container;
 
@@ -21,6 +22,7 @@ export class App extends PIXI.Application {
         await setAnimationTimeoutSync(1);
         this._gameController.resourcesLoaded();
         this.createBg();
+        this.createHeep();
         this.createHerdsman();
 
         new FlowGame();
@@ -54,5 +56,12 @@ export class App extends PIXI.Application {
         this.stage.addChild(herdsmanContainer);
         const herdsmanController: HerdsmanController = new HerdsmanController();
         herdsmanController.initView(herdsmanContainer);
+    }
+
+    createHeep() {
+        const sheepContainer = new PIXI.Container();
+        this.stage.addChild(sheepContainer);
+        const sheepController: SheepController = new SheepController();
+        sheepController.initView(sheepContainer);
     }
 }

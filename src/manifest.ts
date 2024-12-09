@@ -2,12 +2,12 @@
 export const manifest = {
     bundles: [
         {
-            name: "circleAssets",
+            name: "gameAssets",
             assets: {
                 redCircle: "./assets/redCircle.png",
-                whiteCircle: "./assets/whiteCircle.png"
+                whiteCircle: "./assets/whiteCircle.png",
+                yellowArea: "./assets/yellowArea.png",
             }
         },
-
     ]
 };
