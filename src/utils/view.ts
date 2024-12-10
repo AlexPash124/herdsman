@@ -12,16 +12,11 @@ export class View extends Container {
         this.addEventListenerResize();
     }
 
-    initEmitter(): void {
+    protected initEmitter(): void {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    notifyToMediator<T>(notification: string, data?: T): void {
+    protected notifyToMediator<T>(notification: string, data?: T): void {
         this._emitter?.emit(notification, data);
     }
-
-    addEventListenerResize() {
-        window.addEventListener("resize", () => {});
-    }
-
 }

@@ -17,7 +17,7 @@ export class PointsController extends Controller {
         perent.addChild(this._view);
     }
 
-    notificationOutside(): void {
+    protected notificationOutside(): void {
         this.mapNotification(PointsNotification.UPDATE_POINTS, (data) => {
             this._view?.updateTextPoints(data as number);
         });

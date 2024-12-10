@@ -10,7 +10,7 @@ export class ViewBG extends View {
         this.createBg();
     }
 
-    createBg(): void {
+    protected createBg(): void {
         const widthAndHeight = Math.max(window.innerWidth, window.innerHeight)
         this._bgMask = new Graphics()
         this._bgMask.beginFill(0x003300);

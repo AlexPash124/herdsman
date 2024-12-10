@@ -16,7 +16,7 @@ export class GamePreloaderController extends Controller {
         parent.addChild(this._view);
     }
 
-    notificationOutside() {
+    protected notificationOutside() {
         this.mapNotification(GameNotification.RESOURCES_LOADED,  ()=> {
             this._view?.hide();
         });

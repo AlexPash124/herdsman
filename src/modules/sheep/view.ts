@@ -23,7 +23,7 @@ export class ViewSheep extends View {
         this.addChild(sheep);
     }
 
-    isArrayFull(): boolean {
+    protected isArrayFull(): boolean {
         let numberFreeSheep = 0;
         this._sheeps.forEach(shep => {
             if (!shep.isHome) {
@@ -55,7 +55,7 @@ export class ViewSheep extends View {
         })
     }
 
-    createYellowArea(): void {
+    protected createYellowArea(): void {
         this._yellowArea = new Sprite({
             texture: Assets.get("yellowArea"),
             anchor: .5,
@@ -67,11 +67,11 @@ export class ViewSheep extends View {
         this._yellowArea._zIndex = 0;
     }
 
-    getIdForSheep(): number {
+    protected getIdForSheep(): number {
         return this._sheeps.length;
     }
 
-    sheep5Taken(): boolean {
+    protected sheep5Taken(): boolean {
         let numberFreeSheep = 0;
         this._sheeps.forEach(shep => {
             if (shep.isGoingHome) {

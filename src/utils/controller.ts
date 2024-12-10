@@ -13,15 +13,15 @@ export class Controller {
 
     initView(parent: PIXI.Container): void {}
 
-    initEmitter() {
+    protected initEmitter() {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    sendNotification<T>(notification: string, data?: T): void {
+    protected sendNotification<T>(notification: string, data?: T): void {
         this._emitter?.emit(notification, data);
     }
 
-    mapNotification<T>(notification: string, callback: (data: T) => void): void {
+    protected mapNotification<T>(notification: string, callback: (data: T) => void): void {
         this._emitter?.on(notification, (data: T) => {
             callback(data);
         });

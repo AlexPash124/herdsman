@@ -66,7 +66,7 @@ export class Sheep extends PIXI.Container {
         });
     }
 
-    playRandomBehavior(): void {
+    protected playRandomBehavior(): void {
         if (this.isGoingHome || this.isHome) return;
 
         const speed = 50;

@@ -29,19 +29,19 @@ export class SheepController extends Controller {
         }
     }
 
-    mapUiNotification(): void {
+    protected mapUiNotification(): void {
         this.mapNotification(Sheep.SHEEP_ADDED_TO_HOME, () => {
             this.sendNotification(PointsNotification.UPDATE_POINTS, this._view?.getNumberSheepInHouse());
         });
     }
 
-    notificationOutside(): void {
+    protected notificationOutside(): void {
         this.mapNotification(HerdsmanCircleNotification.HERDSMAN_CHANGED_POSITION, (data) => {
             this._view?.checkIsCollisionInHerdsman(data as PIXI.Point);
         });
     }
 
-    async addNewShep(): Promise<void> {
+    protected async addNewShep(): Promise<void> {
         await setAnimationTimeoutSync(randomInteger(3, 10));
         const randomPosition = this._proxy?.getRandomPosition() || new PIXI.Point(100, 100);
         this._view?.createSheep(randomPosition);

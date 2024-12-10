@@ -21,13 +21,13 @@ export class HerdsmanController extends Controller {
         this._view?.setPositionHerdsman(pos);
     }
 
-    notificationOutside(): void {
+    protected notificationOutside(): void {
         this.mapNotification<PIXI.Point>(GameNotification.CLICK, (data) => {
             this._view?.changeAnimationPositionHerdsman(data as PIXI.Point)
         });
     }
 
-    uiNotification(): void {
+    protected uiNotification(): void {
         this.mapNotification(HerdsmanView.HERDSMAN_CHANGED_POSITION, (data) => {
             this.sendNotification(HerdsmanCircleNotification.HERDSMAN_CHANGED_POSITION, data);
         })

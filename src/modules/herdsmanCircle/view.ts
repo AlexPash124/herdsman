@@ -15,7 +15,7 @@ export class HerdsmanView extends View {
         this.createHerdsman();
     }
 
-    createHerdsman(): void {
+    protected createHerdsman(): void {
         this._herdsman = new Sprite({
             texture: Assets.get("redCircle"),
             anchor: .5,

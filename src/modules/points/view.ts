@@ -11,7 +11,7 @@ export class ViewPoints extends View {
         this.createTextPoints();
     }
 
-    createTextPoints(): void {
+    protected createTextPoints(): void {
         const style = new TextStyle({
             fontFamily: 'Arial',
             fontSize: 50,
