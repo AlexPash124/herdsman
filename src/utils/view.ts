@@ -9,14 +9,13 @@ export class View extends Container {
         super();
 
         this.initEmitter();
-        this.addEventListenerResize();
     }
 
     protected initEmitter(): void {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    protected notifyToMediator<T>(notification: string, data?: T): void {
+    notifyToMediator<T>(notification: string, data?: T): void {
         this._emitter?.emit(notification, data);
     }
 }
