@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 import {Assets, Sprite} from "pixi.js";
 import gsap from "gsap";
 import {ViewSheep} from "../view";
+import {randomInteger} from "../../../utils/helperFunctions";
 
 export class Sheep extends PIXI.Container {
     static  SHEEP_ADDED_TO_HOME = "Sheep.SHEEP_ADDED_TO_HOME";
@@ -41,8 +42,8 @@ export class Sheep extends PIXI.Container {
         const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
         const duration = distance / speed;
 
-        const offsetX = (this.id % 5) * this.width / 2;
-        const offsetY = (this.id % 5) * this.height / 2;
+        const offsetX = Math.max((this.id % 5) * this.width / 2, randomInteger(30, 50));
+        const offsetY = Math.max((this.id % 5) * this.height / 2, randomInteger(30, 50));
 
         this._gsapMoveToHouse = gsap.to(this, {
             duration: Math.max(duration, 1),
