@@ -85,15 +85,9 @@ export class PreloaderView extends View {
             alpha: 0,
             onComplete: () => {
                 const parent = this.parent as PIXI.Container;
-                this.parent.removeChild(this);
+                (this.parent as PIXI.Container).removeChild(this as PIXI.Container);
                 parent.destroy({children: true});
             }
         })
-    }
-
-    setPositionLoaderContainer() {
-        const glPos = new Point(window.innerWidth / 2, window.innerHeight / 2);
-        const pos = this.toLocal(glPos);
-        this._loaderContainer?.position.set(pos.x, pos.y);
     }
 }
