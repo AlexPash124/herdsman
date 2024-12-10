@@ -14,12 +14,36 @@ export class ViewSheep extends View {
         this.createYellowArea();
     }
 
-    createSheep(id: number, position: PIXI.Point) {
+    createSheep(position: PIXI.Point) {
+        if (this.isArrayFull()) return;
+
         const {width, height} = this._yellowArea ? this._yellowArea : {width: 100, height: 100};
-        const sheep = new Sheep(id, position, width, height);
+        const sheep = new Sheep(this.getIdForSheep(), position, width, height);
         sheep._zIndex = 100;
         this._sheeps.push(sheep);
         this.addChild(sheep);
+    }
+
+    isArrayFull() {
+        let numberFreeSheep = 0;
+        this._sheeps.forEach(shep => {
+            if (!shep.isHome) {
+                numberFreeSheep++;
+            }
+        });
+
+        return numberFreeSheep > 13;
+    }
+
+    getNumberSheepInHouse(): number {
+        let numberFreeSheep = 0;
+        this._sheeps.forEach(shep => {
+            if (shep.isHome) {
+                numberFreeSheep++;
+            }
+        })
+
+        return numberFreeSheep;
     }
 
     checkIsCollisionInHerdsman(position: PIXI.Point) {
@@ -42,5 +66,9 @@ export class ViewSheep extends View {
         const position = this.toLocal(new PIXI.Point(this._yellowArea.width / 2, window.innerHeight - this._yellowArea.height / 2));
         this._yellowArea.position.set(position.x, position.y);
         this._yellowArea._zIndex = 0;
+    }
+
+    getIdForSheep() {
+        return this._sheeps.length;
     }
 }

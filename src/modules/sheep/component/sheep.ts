@@ -1,8 +1,10 @@
 import * as PIXI from "pixi.js";
 import {Assets, Sprite} from "pixi.js";
 import gsap from "gsap";
+import {ViewSheep} from "../view";
 
 export class Sheep extends PIXI.Container {
+    static  SHEEP_ADDED_TO_HOME = "Sheep.SHEEP_ADDED_TO_HOME";
     id: number;
     isHome: boolean = false;
     isGoingHome: boolean = false;
@@ -16,7 +18,7 @@ export class Sheep extends PIXI.Container {
         this.id = id;
         this._widthYellowArea = widthYellowArea;
         this._heightYellowArea = heightYellowArea;
-        this._gsapMoveToHouse = gsap.to({},{});
+        this._gsapMoveToHouse = gsap.to({}, {});
         this._bg = new Sprite({
             texture: Assets.get("whiteCircle"),
             anchor: .5,
@@ -30,7 +32,7 @@ export class Sheep extends PIXI.Container {
 
     moveToHome(position: PIXI.Point) {
         if (this.isHome) return;
-        if (this._gsapMoveToHouse.isActive()) return;
+        if (this._gsapMoveToHouse?.isActive()) return;
 
         this.isGoingHome = true;
         const speed = 100;
@@ -39,18 +41,27 @@ export class Sheep extends PIXI.Container {
         const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
         const duration = distance / speed;
 
+        const offsetX = (this.id % 5) * this.width * 1.5;
+        const offsetY = (this.id % 3) * this.height * 1.5;
+
         this._gsapMoveToHouse = gsap.to(this, {
-                onUpdate: () => {
-                    if (this.x < this._widthYellowArea - this.width && window.innerHeight - this.y < this._heightYellowArea - this.height) {
+            duration: Math.max(duration, 1),
+            x: position.x - this.width / 2 + offsetX,
+            y: position.y - this.height / 2 + offsetY,
+            ease: "sine.inOut",
+            onUpdate: () => {
+                if (
+                    this.x < this._widthYellowArea - this.width / 2 &&
+                    window.innerHeight - this.y < this._heightYellowArea - this.height / 2
+                ) {
+                    if (!this.isHome) {
                         this.isHome = true;
+                        (this.parent as ViewSheep).notifyToMediator(Sheep.SHEEP_ADDED_TO_HOME);
                     }
-                },
-                duration: Math.max(duration, .5),
-                x: position.x + this.width / 2 + this.id * 10 + Math.cos(Math.PI),
-                y: position.y + this.height / 2 + this.id * 10 + Math.sin(Math.PI),
-                ease: "sine.inOut"
+                    this._gsapMoveToHouse.kill();
+                }
             }
-        );
+        });
     }
 
     playRandomBehavior() {

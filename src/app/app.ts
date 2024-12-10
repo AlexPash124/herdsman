@@ -8,6 +8,7 @@ import {GameController} from "./controller";
 import {HerdsmanController} from "../modules/herdsmanCircle/controller";
 import {FlowGame} from "../modules/flow/flowGame";
 import {SheepController} from "../modules/sheep/controller";
+import {PointsController} from "../modules/points/controller";
 
 export let GLOBAL_CLICK_ARE: PIXI.Container;
 
@@ -24,6 +25,7 @@ export class App extends PIXI.Application {
         this.createBg();
         this.createHeep();
         this.createHerdsman();
+        this.createPoints();
 
         new FlowGame();
     }
@@ -63,5 +65,12 @@ export class App extends PIXI.Application {
         this.stage.addChild(sheepContainer);
         const sheepController: SheepController = new SheepController();
         sheepController.initView(sheepContainer);
+    }
+
+    createPoints() {
+        const pointsContainer = new PIXI.Container();
+        this.stage.addChild(pointsContainer);
+        const sheepController: PointsController = new PointsController();
+        sheepController.initView(pointsContainer);
     }
 }
