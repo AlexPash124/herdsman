@@ -10,11 +10,12 @@ export class HerdsmanView extends View {
 
     constructor() {
         super();
+
         this._gsapChangedPosition = gsap.to({},{});
         this.createHerdsman();
     }
 
-    createHerdsman() {
+    createHerdsman(): void {
         this._herdsman = new Sprite({
             texture: Assets.get("redCircle"),
             anchor: .5,
@@ -24,11 +25,11 @@ export class HerdsmanView extends View {
         this.addChild(this._herdsman);
     }
 
-    setPositionHerdsman(position: PIXI.Point) {
+    setPositionHerdsman(position: PIXI.Point): void {
         this._herdsman?.position.set(position.x, position.y);
     }
 
-    changeAnimationPositionHerdsman(position: PIXI.Point) {
+    changeAnimationPositionHerdsman(position: PIXI.Point): void {
         if (!this._herdsman) return;
         if (this._gsapChangedPosition.isActive()) return;
 

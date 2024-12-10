@@ -14,7 +14,7 @@ export class ViewSheep extends View {
         this.createYellowArea();
     }
 
-    createSheep(position: PIXI.Point) {
+    createSheep(position: PIXI.Point): void {
         if (this.isArrayFull()) return;
 
         const {width, height} = this._yellowArea ? this._yellowArea : {width: 100, height: 100};
@@ -24,7 +24,7 @@ export class ViewSheep extends View {
         this.addChild(sheep);
     }
 
-    isArrayFull() {
+    isArrayFull(): boolean {
         let numberFreeSheep = 0;
         this._sheeps.forEach(shep => {
             if (!shep.isHome) {
@@ -46,7 +46,7 @@ export class ViewSheep extends View {
         return numberFreeSheep;
     }
 
-    checkIsCollisionInHerdsman(position: PIXI.Point) {
+    checkIsCollisionInHerdsman(position: PIXI.Point): void {
         this._sheeps.forEach(shep => {
             if (shep.isGoingHome) {
                 shep.moveToHome(position);
@@ -56,7 +56,7 @@ export class ViewSheep extends View {
         })
     }
 
-    createYellowArea() {
+    createYellowArea(): void {
         this._yellowArea = new Sprite({
             texture: Assets.get("yellowArea"),
             anchor: .5,
@@ -68,7 +68,7 @@ export class ViewSheep extends View {
         this._yellowArea._zIndex = 0;
     }
 
-    getIdForSheep() {
+    getIdForSheep(): number {
         return this._sheeps.length;
     }
 

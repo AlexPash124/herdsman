@@ -30,7 +30,7 @@ export class Sheep extends PIXI.Container {
         this.playRandomBehavior();
     }
 
-    moveToHome(position: PIXI.Point) {
+    moveToHome(position: PIXI.Point): void {
         if (this.isHome) return;
         if (this._gsapMoveToHouse?.isActive()) return;
 
@@ -65,7 +65,7 @@ export class Sheep extends PIXI.Container {
         });
     }
 
-    playRandomBehavior() {
+    playRandomBehavior(): void {
         if (this.isGoingHome || this.isHome) return;
 
         const speed = 50;
@@ -90,7 +90,7 @@ export class Sheep extends PIXI.Container {
         });
     }
 
-    checkIsCollisionInHerdsman(positionHerdsman: PIXI.Point) {
+    checkIsCollisionInHerdsman(positionHerdsman: PIXI.Point): void {
         if (this.isHome) return;
         const deltaX = positionHerdsman.x - this.x;
         const deltaY = positionHerdsman.y - this.y;

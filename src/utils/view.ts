@@ -1,9 +1,8 @@
 import {GLOBAL_EMITTER} from "./eventEmitter";
-import {IView} from "./intefrase/view";
 import EventEmitter from "eventemitter3";
 import {Container} from "pixi.js";
 
-export class View extends Container implements IView {
+export class View extends Container {
     private _emitter?: EventEmitter = GLOBAL_EMITTER;
 
     constructor() {
@@ -13,27 +12,16 @@ export class View extends Container implements IView {
         this.addEventListenerResize();
     }
 
-    initEmitter() {
+    initEmitter(): void {
         this._emitter = GLOBAL_EMITTER;
     }
 
-    notifyToMediator<T>(notification: string, data?: T) {
+    notifyToMediator<T>(notification: string, data?: T): void {
         this._emitter?.emit(notification, data);
     }
 
     addEventListenerResize() {
-        window.addEventListener("resize", () => {
-            setTimeout(() => {
-                this.onResize()
-            }, 100);
-        });
+        window.addEventListener("resize", () => {});
     }
 
-    onResize() {
-
-    }
-
-    isLandScape() {
-        return screen.width > screen.height;
-    }
 }

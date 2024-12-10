@@ -18,7 +18,7 @@ export class Proxy { //для даних
         return new PIXI.Point(x, y);
     }
 
-    getNumberStartSheep() {
+    getNumberStartSheep(): number {
         return randomInteger(5, 10)
     }
 }

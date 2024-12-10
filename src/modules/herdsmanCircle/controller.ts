@@ -1,8 +1,8 @@
 import {Controller} from "../../utils/controller";
 import {HerdsmanView} from "./view";
 import * as PIXI from "pixi.js";
-import {FlowNotifications} from "../flow/flowNotification";
 import {HerdsmanCircleNotification} from "./notification";
+import {GameNotification} from "../../app/notification";
 
 export class HerdsmanController extends Controller {
     protected _view?: HerdsmanView;
@@ -13,7 +13,7 @@ export class HerdsmanController extends Controller {
         this.uiNotification();
     }
 
-    initView(parent: PIXI.Container) {
+    initView(parent: PIXI.Container): void {
         this._view = new HerdsmanView();
         parent.addChild(this._view)
 
@@ -21,13 +21,13 @@ export class HerdsmanController extends Controller {
         this._view?.setPositionHerdsman(pos);
     }
 
-    notificationOutside() {
-        this.mapNotification<PIXI.Point>(FlowNotifications.CLICK, (data) => {
+    notificationOutside(): void {
+        this.mapNotification<PIXI.Point>(GameNotification.CLICK, (data) => {
             this._view?.changeAnimationPositionHerdsman(data as PIXI.Point)
         });
     }
 
-    uiNotification() {
+    uiNotification(): void {
         this.mapNotification(HerdsmanView.HERDSMAN_CHANGED_POSITION, (data) => {
             this.sendNotification(HerdsmanCircleNotification.HERDSMAN_CHANGED_POSITION, data);
         })

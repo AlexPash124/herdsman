@@ -10,9 +10,9 @@ export class GamePreloaderController extends Controller {
         //this.notificationOutside();
     }
 
-    initView(parent: PIXI.Container) {
+    initView(parent: PIXI.Container): void {
         this._view = new PreloaderView();
-        parent.addChild(this._view)
+        parent.addChild(this._view);
     }
 
     // notificationOutside() {

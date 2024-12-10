@@ -11,7 +11,7 @@ export class ViewPoints extends View {
         this.createTextPoints();
     }
 
-    createTextPoints() {
+    createTextPoints(): void {
         const style = new TextStyle({
             fontFamily: 'Arial',
             fontSize: 50,
@@ -31,7 +31,7 @@ export class ViewPoints extends View {
         this._textPoints.position.set(window.innerWidth - this.width, this.height);
     }
 
-    updateTextPoints(points: number) {
+    updateTextPoints(points: number): void {
         if (!this._textPoints) return;
 
         this._textPoints.text = (this._textToOut as string) + points;

@@ -12,12 +12,12 @@ export class PointsController extends Controller {
         this.notificationOutside();
     }
 
-    initView(perent: PIXI.Container) {
+    initView(perent: PIXI.Container): void {
         this._view = new ViewPoints;
         perent.addChild(this._view);
     }
 
-    notificationOutside() {
+    notificationOutside(): void {
         this.mapNotification(PointsNotification.UPDATE_POINTS, (data) => {
             this._view?.updateTextPoints(data as number);
         });

@@ -6,7 +6,7 @@ import * as PIXI from "pixi.js";
 export class BgController extends Controller {
     protected _view?: ViewBG;
 
-    initView(perent: PIXI.Container) {
+    initView(perent: PIXI.Container): void {
         this._view = new ViewBG;
         perent.addChild(this._view);
     }

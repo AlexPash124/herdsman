@@ -16,7 +16,6 @@ export class PreloaderView extends View {
         super();
         this.createBg()
 
-        this.createConfig();
         this.createCirclePreloadProgress();
 
         this._zIndex = 100;
@@ -30,10 +29,6 @@ export class PreloaderView extends View {
         this._blackBg.endFill();
         this.addChild(this._blackBg);
         this._blackBg.alpha = 1;
-    }
-
-    createConfig() {
-
     }
 
     createCirclePreloadProgress() {
@@ -94,11 +89,6 @@ export class PreloaderView extends View {
                 parent.destroy({children: true});
             }
         })
-    }
-
-    onResize() {
-        // super.onResize();
-        // this.setPositionLoaderContainer();
     }
 
     setPositionLoaderContainer() {
