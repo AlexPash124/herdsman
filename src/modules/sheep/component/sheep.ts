@@ -41,8 +41,8 @@ export class Sheep extends PIXI.Container {
         const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
         const duration = distance / speed;
 
-        const offsetX = (this.id % 5) * this.width * 1.5;
-        const offsetY = (this.id % 3) * this.height * 1.5;
+        const offsetX = (this.id % 5) * this.width / 2;
+        const offsetY = (this.id % 5) * this.height / 2;
 
         this._gsapMoveToHouse = gsap.to(this, {
             duration: Math.max(duration, 1),
