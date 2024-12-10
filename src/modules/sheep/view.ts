@@ -3,7 +3,6 @@ import * as PIXI from "pixi.js";
 import {Sheep} from "./component/sheep";
 import {Assets, Sprite} from "pixi.js";
 
-
 export class ViewSheep extends View {
     protected _sheeps: Sheep[] = [];
     protected _yellowArea?: PIXI.Sprite;
@@ -60,7 +59,7 @@ export class ViewSheep extends View {
         this._yellowArea = new Sprite({
             texture: Assets.get("yellowArea"),
             anchor: .5,
-            scale: .6,
+            scale: .8,
         });
         this.addChild(this._yellowArea);
         const position = this.toLocal(new PIXI.Point(this._yellowArea.width / 2, window.innerHeight - this._yellowArea.height / 2));

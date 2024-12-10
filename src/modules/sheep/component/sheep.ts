@@ -23,7 +23,7 @@ export class Sheep extends PIXI.Container {
         this._bg = new Sprite({
             texture: Assets.get("whiteCircle"),
             anchor: .5,
-            scale: .5,
+            scale:  Math.random() * (.8 - .5) + .5,
         });
         this.addChild(this._bg);
         this.position.set(startPosition.x, startPosition.y);
@@ -60,7 +60,7 @@ export class Sheep extends PIXI.Container {
                         this.isGoingHome = false;
                         (this.parent as ViewSheep).notifyToMediator(Sheep.SHEEP_ADDED_TO_HOME);
                     }
-                    this._gsapMoveToHouse.kill();
+                    this._gsapMoveToHouse.paused();
                 }
             }
         });
@@ -99,5 +99,4 @@ export class Sheep extends PIXI.Container {
 
         if (distance < 50) this.isGoingHome = true;
     }
-
 }
