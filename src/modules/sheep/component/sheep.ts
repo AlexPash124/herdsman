@@ -56,6 +56,7 @@ export class Sheep extends PIXI.Container {
                 ) {
                     if (!this.isHome) {
                         this.isHome = true;
+                        this.isGoingHome = false;
                         (this.parent as ViewSheep).notifyToMediator(Sheep.SHEEP_ADDED_TO_HOME);
                     }
                     this._gsapMoveToHouse.kill();
@@ -65,7 +66,7 @@ export class Sheep extends PIXI.Container {
     }
 
     playRandomBehavior() {
-        if (this.isGoingHome) return;
+        if (this.isGoingHome || this.isHome) return;
 
         const speed = 50;
         const newX = Math.random() * window.innerWidth;

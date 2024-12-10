@@ -50,7 +50,7 @@ export class ViewSheep extends View {
         this._sheeps.forEach(shep => {
             if (shep.isGoingHome) {
                 shep.moveToHome(position);
-            } else {
+            } else if (!this.sheep5Taken()) {
                 shep.checkIsCollisionInHerdsman(position);
             }
         })
@@ -70,5 +70,16 @@ export class ViewSheep extends View {
 
     getIdForSheep() {
         return this._sheeps.length;
+    }
+
+    sheep5Taken(): boolean {
+        let numberFreeSheep = 0;
+        this._sheeps.forEach(shep => {
+            if (shep.isGoingHome) {
+                numberFreeSheep++;
+            }
+        });
+
+        return numberFreeSheep > 4;
     }
 }
